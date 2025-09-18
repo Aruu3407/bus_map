@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bus Marker Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Bus Marker on OSM Map</h2>
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    // Initialize map and center on coordinates
+    var map = L.map('map').setView([23.0225, 72.5714], 13); // Example: Ahmedabad
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Define a custom bus icon
+    var busIcon = L.icon({
+        iconUrl: 'yellow-bus.png.png',  // Make sure bus.png is in the same folder
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],  // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -40]
+    });
+
+    // Add bus marker
+    var busMarker = L.marker([23.0225, 72.5714], {icon: busIcon}).addTo(map);
+    busMarker.bindPopup("<b>Bus Location</b>").openPopup();
+
+    // Optional: add default blue marker somewhere
+    var defaultMarker = L.marker([23.0270, 72.5720]).addTo(map);
+    defaultMarker.bindPopup("Default Blue Marker");
+</script>
+
+</body>
+</html>
+
+
